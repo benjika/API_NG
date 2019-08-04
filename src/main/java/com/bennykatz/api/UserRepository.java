@@ -1,4 +1,9 @@
 package com.bennykatz.api;
 
-public interface UserRepository {
+import com.bennykatz.api.io.entity.UserEntity;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface UserRepository extends CrudRepository<UserEntity, Long> {
 }
