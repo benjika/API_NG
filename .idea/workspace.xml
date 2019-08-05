@@ -2,18 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99c60988-6afd-4487-8ec1-a8b17cafa1a1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_dataformat_jackson_dataformat_xml_2_9_9.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_jaxb_annotations_2_9_9.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_woodstox_woodstox_core_5_0_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_woodstox_stax2_api_3_1_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/exeptions/AppExceptionsHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/exeptions/UserServiceException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/ui/model/response/ErrorMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/ui/model/response/ErrorMessagesEnum.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApiNirGilo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ApiNirGilo.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/ui/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/ui/controllers/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/exeptions/AppExceptionsHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/exeptions/AppExceptionsHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/bennykatz/api/ui/controllers/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/bennykatz/api/ui/controllers/UserController.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -88,7 +79,7 @@
       <updated>1564822722679</updated>
       <workItem from="1564822726663" duration="17583000" />
       <workItem from="1564979869883" duration="967000" />
-      <workItem from="1564981533829" duration="19846000" />
+      <workItem from="1564981533829" duration="20849000" />
     </task>
     <servers />
   </component>
@@ -125,6 +116,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/bennykatz/api/security/AuthenticationFilter.java</url>
           <line>56</line>
           <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/bennykatz/api/exeptions/AppExceptionsHandler.java</url>
+          <line>29</line>
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
