@@ -1,4 +1,4 @@
-package com.bennykatz.api;
+package com.bennykatz.api.io.repositories;
 
 import com.bennykatz.api.io.entity.UserEntity;
 import org.springframework.data.repository.CrudRepository;
