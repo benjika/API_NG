@@ -2,32 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99c60988-6afd-4487-8ec1-a8b17cafa1a1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/SpringApplicationContext.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/security/AppProperties.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/security/AuthenticationFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/security/AuthorizationFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/security/SecurityConstants.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/ui/model/request/UserLoginRequestModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/bennykatz/api/SpringApplicationContext.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/bennykatz/api/security/AppProperties.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/bennykatz/api/security/AuthenticationFilter.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/bennykatz/api/security/AuthorizationFilter.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/bennykatz/api/security/SecurityConstants.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/bennykatz/api/ui/model/request/UserLoginRequestModel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/ApiApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/ApiApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/io/repositories/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/security/WebSecurity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/security/WebSecurity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/io/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/io/repositories/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/ApiNirGilo.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/bennykatz/api/ApiApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/bennykatz/api/ApiApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/bennykatz/api/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/bennykatz/api/io/repositories/UserRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/bennykatz/api/security/WebSecurity.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/bennykatz/api/security/WebSecurity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/bennykatz/api/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/bennykatz/api/service/UserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/bennykatz/api/service/impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/bennykatz/api/service/impl/UserServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/ui/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/ui/controllers/UserController.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -101,7 +80,7 @@
       <updated>1564822722679</updated>
       <workItem from="1564822726663" duration="17583000" />
       <workItem from="1564979869883" duration="967000" />
-      <workItem from="1564981533829" duration="13991000" />
+      <workItem from="1564981533829" duration="15242000" />
     </task>
     <servers />
   </component>
