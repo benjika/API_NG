@@ -36,7 +36,8 @@ public class UserController {
             produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public UserRest createUser(@RequestBody UserDetailsRequestModel userDetails) throws Exception {
         UserRest returnedValue = new UserRest();
-        if (userDetails.getFirstName().isEmpty())
+        if (userDetails.getFirstName().isEmpty() || userDetails.getLastName().isEmpty() ||
+                userDetails.getPassword().isEmpty() || userDetails.getEmail().isEmpty())
             throw new UserServiceException(ErrorMessagesEnum.MISSING_REQUIRED_FIELD.getErrorMessage());
 
         UserDto userDto = new UserDto();
@@ -48,9 +49,19 @@ public class UserController {
         return returnedValue;
     }
 
-    @PutMapping
-    public String updateUser() {
-        return "updateUser was called";
+    @PutMapping(path = "/{id}",
+            consumes = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public UserRest updateUser(@PathVariable String id, @RequestBody UserDetailsRequestModel userDetails) {
+        UserRest returnedValue = new UserRest();
+
+        UserDto userDto = new UserDto();
+        BeanUtils.copyProperties(userDetails, userDto);
+
+        UserDto updatedUser = userService.updateUser(id,userDto);
+        BeanUtils.copyProperties(updatedUser, returnedValue);
+
+        return returnedValue;
     }
 
     @DeleteMapping
