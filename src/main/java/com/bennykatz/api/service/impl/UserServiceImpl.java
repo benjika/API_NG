@@ -9,6 +9,9 @@ import com.bennykatz.api.shared.dto.UserDto;
 import com.bennykatz.api.ui.model.response.ErrorMessagesEnum;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,6 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -80,6 +84,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<UserDto> getUsersList(int page, int limit) {
+        List<UserDto> returnedValue = new ArrayList<>();
+
+        Pageable pageable = PageRequest.of(page, limit);
+        Page<UserEntity> userEntityPage = userRepository.findAll(pageable);
+
+        List<UserEntity> userEntities = userEntityPage.getContent();
+
+        for(UserEntity userEntity:userEntities){
+            UserDto userDto = new UserDto();
+            BeanUtils.copyProperties(userEntity,userDto);
+            returnedValue.add(userDto);
+        }
+
+        return returnedValue;
+    }
+
+    @Override
     public UserDto updateUser(String userId, UserDto userDto) {
         UserDto returnedValue = new UserDto();
         UserEntity userEntity = userRepository.findByUserId(userId);
@@ -105,8 +127,9 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(String userId) {
         UserEntity userEntity = userRepository.findByUserId(userId);
 
-        if (userEntity == null)
-            throw new UsernameNotFoundException(userId);
+        if (userEntity == null) {
+            throw new UserServiceException(ErrorMessagesEnum.NO_RECORD_FOUND.getErrorMessage());
+        }
 
         userRepository.delete(userEntity);
     }
@@ -116,7 +139,7 @@ public class UserServiceImpl implements UserService {
         UserEntity userEntity = userRepository.findByEmail(email);
 
         if (userEntity == null) {
-            throw new UsernameNotFoundException(email);
+            throw new UserServiceException(ErrorMessagesEnum.NO_RECORD_FOUND.getErrorMessage());
         }
 
         return new User(userEntity.getEmail(), userEntity.getEncryptedPassword(), new ArrayList<>());

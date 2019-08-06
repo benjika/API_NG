@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99c60988-6afd-4487-8ec1-a8b17cafa1a1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/ui/model/response/OperationStatusModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/ui/model/response/RequestOperationName.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/ui/model/response/RequestOperationStatus.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/io/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/io/repositories/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/service/impl/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/ui/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/ui/controllers/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/bennykatz/api/io/repositories/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/bennykatz/api/io/repositories/UserRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/bennykatz/api/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/bennykatz/api/service/UserService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/bennykatz/api/service/impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/bennykatz/api/service/impl/UserServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/bennykatz/api/ui/controllers/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/bennykatz/api/ui/controllers/UserController.class" afterDir="false" />
@@ -87,7 +86,7 @@
       <workItem from="1564822726663" duration="17583000" />
       <workItem from="1564979869883" duration="967000" />
       <workItem from="1564981533829" duration="23827000" />
-      <workItem from="1565077537994" duration="1965000" />
+      <workItem from="1565077537994" duration="5546000" />
     </task>
     <servers />
   </component>
@@ -129,6 +128,26 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/bennykatz/api/exeptions/AppExceptionsHandler.java</url>
           <line>29</line>
           <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/bennykatz/api/ui/controllers/UserController.java</url>
+          <line>59</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/bennykatz/api/service/impl/UserServiceImpl.java</url>
+          <line>89</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/bennykatz/api/security/SecurityConstants.java</url>
+          <line>11</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/bennykatz/api/security/SecurityConstants.java</url>
+          <line>12</line>
+          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

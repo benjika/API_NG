@@ -10,25 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("users")
 public class UserController {
 
     @Autowired
     UserService userService;
-
-    @GetMapping(path = "/{id}",
-            produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
-    public UserRest getUser(@PathVariable String id) {
-
-        UserRest returnedValue = new UserRest();
-
-        UserDto userDto = userService.getUserByUserId(id);
-
-        BeanUtils.copyProperties(userDto, returnedValue);
-
-        return returnedValue;
-    }
 
     @PostMapping(
             consumes = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE},
@@ -47,6 +37,35 @@ public class UserController {
 
         return returnedValue;
     }
+
+    @GetMapping(path = "/{id}",
+            produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public UserRest getUser(@PathVariable String id) {
+
+        UserRest returnedValue = new UserRest();
+
+        UserDto userDto = userService.getUserByUserId(id);
+
+        BeanUtils.copyProperties(userDto, returnedValue);
+
+        return returnedValue;
+    }
+
+    @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public List<UserRest> getUsersList(@RequestParam(value = "page", defaultValue = "0") int page,
+                                       @RequestParam(value = "limit", defaultValue = "2") int limit) {
+        List<UserRest> returnedValue = new ArrayList<>();
+        List<UserDto> userDtoList = userService.getUsersList(page, limit);
+
+        for (UserDto userDto : userDtoList) {
+            UserRest userRest = new UserRest();
+            BeanUtils.copyProperties(userDto, userRest);
+            returnedValue.add(userRest);
+        }
+
+        return returnedValue;
+    }
+
 
     @PutMapping(path = "/{id}",
             consumes = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE},
