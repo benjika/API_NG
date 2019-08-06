@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99c60988-6afd-4487-8ec1-a8b17cafa1a1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/ui/model/response/OperationStatusModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/ui/model/response/RequestOperationName.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/ui/model/response/RequestOperationStatus.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bennykatz/api/service/impl/UserServiceImpl.java" afterDir="false" />
@@ -23,8 +26,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Enum" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -83,7 +86,8 @@
       <updated>1564822722679</updated>
       <workItem from="1564822726663" duration="17583000" />
       <workItem from="1564979869883" duration="967000" />
-      <workItem from="1564981533829" duration="23227000" />
+      <workItem from="1564981533829" duration="23827000" />
+      <workItem from="1565077537994" duration="1965000" />
     </task>
     <servers />
   </component>
