@@ -5,8 +5,10 @@ import com.bennykatz.api.io.entity.UserEntity;
 import com.bennykatz.api.io.repositories.UserRepository;
 import com.bennykatz.api.service.UserService;
 import com.bennykatz.api.shared.Utils;
+import com.bennykatz.api.shared.dto.AddressDto;
 import com.bennykatz.api.shared.dto.UserDto;
 import com.bennykatz.api.ui.model.response.ErrorMessagesEnum;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +22,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -36,17 +42,53 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto createUser(UserDto userDto) {
 
-        UserEntity storedUserDetails = userRepository.findByEmail(userDto.getEmail());
-
         if (userRepository.findByEmail(userDto.getEmail()) != null) {
             throw new RuntimeException("Record already exists");
         }
 
-        UserEntity userEntity = new UserEntity();
-        BeanUtils.copyProperties(userDto, userEntity);
+        int addressesSize = userDto.getAddresses().size();
 
-        userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
-        userEntity.setUserId(utils.generateUserId(30));
+        ExecutorService executorService = Executors.newFixedThreadPool(addressesSize + 2);
+        Future<String> userIdFuture = executorService.submit(new UserIdGenerator());
+        Future<String> encryptedPasswordFuture = executorService.submit(new PasswordEncrypter(userDto.getPassword()));
+        List<Future<String>> addressesIds = new ArrayList<>();
+        for (int i = 0; i < addressesSize; i++) {
+            addressesIds.add(executorService.submit(new AddressIdGenerator()));
+        }
+
+        if (addressesSize > 0) {
+
+            for (int i = 0; i < addressesSize; i++) {
+                AddressDto addressDto = userDto.getAddresses().get(i);
+                addressDto.setUserDetails(userDto);
+                String addressId = null;
+                try {
+                    addressId = addressesIds.get(i).get();
+                } catch (InterruptedException | ExecutionException e) {
+                    e.printStackTrace();
+                }
+                addressDto.setAddressId(addressId);
+                userDto.getAddresses().set(i, addressDto);
+            }
+        }
+        ModelMapper modelMapper = new ModelMapper();
+
+        UserEntity userEntity = modelMapper.map(userDto, UserEntity.class);
+
+        String userId = null;
+        String encryptedPassword = null;
+        try {
+            userId = userIdFuture.get();
+            encryptedPassword = encryptedPasswordFuture.get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        executorService.shutdown();
+
+        userEntity.setUserId(userId);
+        userEntity.setEncryptedPassword(encryptedPassword);
+
 
         UserEntity storedUserEntity = userRepository.save(userEntity);
 
@@ -92,9 +134,9 @@ public class UserServiceImpl implements UserService {
 
         List<UserEntity> userEntities = userEntityPage.getContent();
 
-        for(UserEntity userEntity:userEntities){
+        for (UserEntity userEntity : userEntities) {
             UserDto userDto = new UserDto();
-            BeanUtils.copyProperties(userEntity,userDto);
+            BeanUtils.copyProperties(userEntity, userDto);
             returnedValue.add(userDto);
         }
 
@@ -143,5 +185,35 @@ public class UserServiceImpl implements UserService {
         }
 
         return new User(userEntity.getEmail(), userEntity.getEncryptedPassword(), new ArrayList<>());
+    }
+
+}
+
+class AddressIdGenerator implements java.util.concurrent.Callable<String> {
+    @Override
+    public String call() throws Exception {
+        return new Utils().generateAddressId(30);
+    }
+}
+
+class UserIdGenerator implements java.util.concurrent.Callable<String> {
+    @Override
+    public String call() throws Exception {
+        return new Utils().generateUserId(30);
+    }
+}
+
+class PasswordEncrypter implements java.util.concurrent.Callable<String> {
+
+    private String password;
+
+    public PasswordEncrypter(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String call() throws Exception {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        return bCryptPasswordEncoder.encode(password);
     }
 }

@@ -1,39 +1,47 @@
 package com.bennykatz.api.ui.controllers;
 
 import com.bennykatz.api.exeptions.UserServiceException;
+import com.bennykatz.api.service.AddressService;
 import com.bennykatz.api.service.UserService;
+import com.bennykatz.api.shared.dto.AddressDto;
 import com.bennykatz.api.shared.dto.UserDto;
-import com.bennykatz.api.ui.model.request.UserDetailsRequestModel;
+import com.bennykatz.api.ui.model.request.UserRequestModel;
 import com.bennykatz.api.ui.model.response.*;
-import org.springframework.beans.BeanUtils;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("users")
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
     UserService userService;
 
+    @Autowired
+    AddressService addressService;
+
     @PostMapping(
             consumes = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
-    public UserRest createUser(@RequestBody UserDetailsRequestModel userDetails) throws Exception {
+    public UserRest createUser(@RequestBody UserRequestModel userDetails) throws Exception {
         UserRest returnedValue = new UserRest();
-        if (userDetails.getFirstName().isEmpty() || userDetails.getLastName().isEmpty() ||
-                userDetails.getPassword().isEmpty() || userDetails.getEmail().isEmpty())
-            throw new UserServiceException(ErrorMessagesEnum.MISSING_REQUIRED_FIELD.getErrorMessage());
 
-        UserDto userDto = new UserDto();
-        BeanUtils.copyProperties(userDetails, userDto);
+        if (userDetails.getFirstName().isEmpty() || userDetails.getLastName().isEmpty() ||
+                userDetails.getPassword().isEmpty() || userDetails.getEmail().isEmpty()) {
+            throw new UserServiceException(ErrorMessagesEnum.MISSING_REQUIRED_FIELD.getErrorMessage());
+        }
+
+        UserDto userDto = new ModelMapper().map(userDetails, UserDto.class);
 
         UserDto createdUser = userService.createUser(userDto);
-        BeanUtils.copyProperties(createdUser, returnedValue);
+        returnedValue = new ModelMapper().map(createdUser, UserRest.class);
 
         return returnedValue;
     }
@@ -42,11 +50,9 @@ public class UserController {
             produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public UserRest getUser(@PathVariable String id) {
 
-        UserRest returnedValue = new UserRest();
-
         UserDto userDto = userService.getUserByUserId(id);
 
-        BeanUtils.copyProperties(userDto, returnedValue);
+        UserRest returnedValue = new ModelMapper().map(userDto, UserRest.class);
 
         return returnedValue;
     }
@@ -56,10 +62,11 @@ public class UserController {
                                        @RequestParam(value = "limit", defaultValue = "2") int limit) {
         List<UserRest> returnedValue = new ArrayList<>();
         List<UserDto> userDtoList = userService.getUsersList(page, limit);
+        ModelMapper modelMapper = new ModelMapper();
 
         for (UserDto userDto : userDtoList) {
-            UserRest userRest = new UserRest();
-            BeanUtils.copyProperties(userDto, userRest);
+            UserRest userRest = modelMapper.map(userDto, UserRest.class);
+            //BeanUtils.copyProperties(userDto, userRest);
             returnedValue.add(userRest);
         }
 
@@ -70,14 +77,16 @@ public class UserController {
     @PutMapping(path = "/{id}",
             consumes = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
-    public UserRest updateUser(@PathVariable String id, @RequestBody UserDetailsRequestModel userDetails) {
-        UserRest returnedValue = new UserRest();
+    public UserRest updateUser(@PathVariable String id, @RequestBody UserRequestModel userDetails) {
 
-        UserDto userDto = new UserDto();
-        BeanUtils.copyProperties(userDetails, userDto);
+        ModelMapper modelMapper = new ModelMapper();
+
+        UserDto userDto = modelMapper.map(userDetails, UserDto.class);
+        //BeanUtils.copyProperties(userDetails, userDto);
 
         UserDto updatedUser = userService.updateUser(id, userDto);
-        BeanUtils.copyProperties(updatedUser, returnedValue);
+        UserRest returnedValue = modelMapper.map(updatedUser, UserRest.class);
+        //BeanUtils.copyProperties(updatedUser, returnedValue);
 
         return returnedValue;
     }
@@ -92,5 +101,37 @@ public class UserController {
 
         operationStatusModel.setOperationResult(RequestOperationStatus.SUCCESS.name());
         return operationStatusModel;
+    }
+
+    @GetMapping(path = "/{id}/addresses",
+            produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public List<AddressRest> getAddressesList(@PathVariable String id) {
+
+        List<AddressRest> returnedValue = new ArrayList<>();
+
+        List<AddressDto> addressDtoList = addressService.getAddressesList(id);
+
+        if (addressDtoList != null && !addressDtoList.isEmpty()) {
+            Type listType = new TypeToken<List<AddressRest>>() {
+            }.getType();
+            returnedValue = new ModelMapper().map(addressDtoList, listType);
+        }
+
+        return returnedValue;
+    }
+
+    @GetMapping(path = "/{userId}/addresses/{addressId}",
+            produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public AddressRest getAddress(@PathVariable String addressId) {
+
+        AddressRest returnedValue = new AddressRest();
+
+        AddressDto addressDto = addressService.getAddress(addressId);
+
+        if (addressDto == null) {
+            throw new UserServiceException(ErrorMessagesEnum.ADDRESS_NOT_FOUND.getErrorMessage());
+        }
+
+        return new ModelMapper().map(addressDto, AddressRest.class);
     }
 }
